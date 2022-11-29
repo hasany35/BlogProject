@@ -1,0 +1,106 @@
+﻿@model List<GetArticleWithUserVM>
+
+
+<div class="row mt-2">
+
+    <div class="col-md-9">
+        <hr />
+        @foreach (var item in @Model)
+        {
+            <div class="row mt-2">
+
+            <div class="col-md-1 px-0 ms-2 p-0">
+                    <img class="rounded-circle p-0" src="@item.UserImage" style="height:55px;width:50px" />
+                </div>
+
+            <div class="col-md-10">
+                <div class="">
+                        <a class="text-dark fw-bold" asp-controller="AppUser" asp-action="Detail" asp-route-id="@item.UserId">@item.UserFullName </a>
+                    </div>
+                <div>
+                        <label class="text-muted fw-light">@item.CreateDate.ToShortDateString() / @item.ReadingTime - min read / @item.ReadCounter times read </label>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <div class="row">
+                <div class="col-md-9 pe-2">
+
+                        @if (@item.Title.Length > 100)
+                        {
+                            <a asp-action="Detail" asp-controller="Article" asp-route-id="@item.ArticleId" class="fw-bold text-dark">
+                                <h5 class="mt-2"><strong>@item.Title.Substring(0,100)</strong></h5>
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-action="Detail" asp-controller="Article" asp-route-id="@item.ArticleId" class="fw-bold text-dark">
+                                <h5 class="mt-2"><strong>@item.Title</strong></h5>
+                            </a>
+
+                        }
+
+
+                        @if (@item.Content.Length > 250)
+                        {
+                            <p class="mb-1">
+                                @item.Content.Substring(0,250) <a asp-action="Detail" asp-controller="Article" asp-route-id="@item.ArticleId" class="fw-bold">...</a>
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="mb-1">
+                                @item.Content
+                            </p>
+                        }
+
+                    <a asp-action="ListWithFilter" asp-controller="Article" asp-route-id="@item.CategoryID" class="btn btn-secondary btn-sm fw-info px-2 py-1">@item.CategoryName</a>
+
+
+                    </div>
+
+                <div class="col-md-2 d-flex justify-content-end">
+
+                        <img class="mt-3" src="@item.Image" style="height:120px;width:120px" />
+
+                    </div>
+                </div>
+            </div>
+            <hr />
+        }
+
+    </div>
+
+    <!-- Followed Category and Information Div -->
+   <div class="col-md-3 ms-5">
+            <div class="ms-3">
+                <div class="mt-4">
+
+
+                    <p class="mt-4 p-0 fw-bold" style="border-bottom: thin solid grey">Seçebileceğiniz Kategoriler</p>
+
+                    <form asp-controller="Article" asp-action="ListWithFilters" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="All"></div>
+                        <div class="mb-2">
+                            <button type="submit" class="u i">FİLTRELE</button>
+                            <hr />
+                        </div>
+                        @if (@ViewBag.AllCategories!=null)
+                       {
+                        @foreach (var item2 in @ViewBag.AllCategories)
+                        {
+
+                            <div class="mb-2">
+                                <input type="checkbox" style="height:31px;width:32px;margin-bottom:0" class="btn-check" name="categories[]" value="@item2.ID" id="@item2.ID" autocomplete="off">
+                                <label class="" style="margin-bottom:0;font-size:19px;margin-top:auto" for="@item2.ID">@item2.Name</label>
+                            </div>
+                            <br>
+                        }   
+                       }
+                    </form>
+                </div>
+            </div>
+
+    </div>
+</div>

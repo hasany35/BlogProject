@@ -1,0 +1,80 @@
+﻿@model List<GetArticleWithUserVM>
+<div class="row mt-2">
+    <div class="col-md-8">
+        @foreach (var item in Model)
+        {
+            <div class="col-12 d-flex align-items-stretch flex-column mb-4">
+                <div class="card bg-light d-flex flex-fill">
+                    <div class="card-header text-muted border-bottom-0">
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col-7">
+                                <h2 class="lead"><b style="font-weight:bold">@item.Title</b></h2>
+                                @if (@item.Content.Length > 150)
+                                {
+                                    <p class="text-muted text-sm"><b>@item.Content.Substring(0,30)</b></p>
+
+                                }
+                                else
+                                {
+                                    <p class="text-muted text-sm"><b>@item.Content</b></p>
+                                }
+                                <ul class="ml-4 mb-0 fa-ul text-muted">
+                                    <li> <a asp-controller="Article" asp-action="Detail" asp-route-id="@item.ArticleId"> devamı icin tıkla</a> </li>
+                                </ul>
+                            </div>
+                            <div class="col-5 text-center">
+                                <img src="@item.Image" alt="user-avatar" class="img-circle img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-right">
+                            <a asp-action="ListWithFilter" asp-controller="Article" asp-route-id="@item.CategoryID" class="btn btn-secondary btn-sm fw-info px-2 py-1">@item.CategoryName</a>
+                            <a href="#" class="btn btn-sm bg-teal">
+                                <i class="fas fa-comments"> created date : @item.CreatedDate</i>
+                            </a>
+                            <a asp-action="Detail" asp-controller="AppUser" asp-route-id="@item.UserId" class="btn btn-sm btn-primary">
+                                <i class="fas fa-user"></i> @item.UserFullName
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+    <div class="col-md-3 ms-5">
+            <div class="ms-3">
+                <div class="mt-4">
+
+
+                    <p class="mt-4 p-0 fw-bold" style="border-bottom: thin solid grey">Seçebileceğiniz Kategoriler</p>
+
+                    <form asp-controller="Article" asp-action="ListWithFilters" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="All"></div>
+                        <div class="mb-2">
+                            <button type="submit" class="u i">FİLTRELE</button>
+                            <hr />
+                        </div>
+                        @foreach (var item2 in @ViewBag.AllCategories)
+                        {
+
+                            <div class="mb-2">
+                                <input type="checkbox" style="height:31px;width:32px;margin-bottom:0" class="btn-check" name="categories[]" value="@item2.ID" id="@item2.ID" autocomplete="off">
+                                <label class="" style="margin-bottom:0;font-size:19px;margin-top:auto" for="@item2.ID">@item2.Name</label>
+                            </div>
+                            <br>
+                        }
+                    </form>
+                </div>
+            </div>
+
+    </div>
+
+
+
+
+</div>
+

@@ -1,0 +1,58 @@
+﻿@model UpdateAppUserDTO
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Profil Güncelle</h3>
+    </div>
+
+    <form asp-action="Update" method="post" enctype="multipart/form-data">
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="FirstName">FirstName</label>
+                <input asp-for="FirstName" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName">LastName</label>
+                <input asp-for="LastName" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName">UserName</label>
+                <input asp-for="UserName" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="Mail">Mail</label>
+                <input asp-for="Mail" type="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" type="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="ImagePath">Image</label>
+                <input asp-for="ImagePath" type="file" class="form-control">
+            </div>
+            <input type="hidden" asp-for="IdentityId" />
+            <input type="hidden" asp-for="ImagePath" />
+            <input type="hidden" asp-for="ID" />
+            <input type="hidden" asp-for="oldImage" />
+            <input type="hidden" asp-for="oldPassword" />
+
+
+        </div>
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary"> Güncelle </button>
+        </div>
+
+    </form>
+    <div>
+        <a asp-action="Delete" class="btn btn-warning">Profili Dondur & Sil</a>
+    </div>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+           <p><strong>@TempData["Message"]</strong></p>
+        </div>
+    }
+</div>

@@ -1,0 +1,48 @@
+﻿
+@model CreateUserDTO
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">KAYIT PANELİ</h3>
+    </div>
+
+    <form  asp-action="Create" method="post" enctype="multipart/form-data">
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="FirstName">FirstName</label>
+                <input asp-for="FirstName" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName">LastName</label>
+                <input asp-for="LastName" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName">UserName</label>
+                <input asp-for="UserName" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="Mail">Mail</label>
+                <input asp-for="Mail" type="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" type="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="ImagePath">Image</label>
+                <input asp-for="ImagePath" type="file" class="form-control">
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+        </div>
+    </form>
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <p><strong>@TempData["Message"]</strong></p>
+        </div>
+    }
+</div>

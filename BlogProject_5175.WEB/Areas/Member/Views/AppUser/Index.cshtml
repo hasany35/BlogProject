@@ -1,0 +1,30 @@
+﻿@model AppUser
+
+@section UserInfo {
+
+<div class="image">
+    <img src="@Model.Image" class="img-circle elevation-2" alt="User Image">
+</div>
+<div class="info">
+    <a href="#" class="d-block">@Model.FullName</a>
+</div>
+
+}
+
+@section Hosgeldin {
+<h2>Hoşgeldin, @Model.FullName .... </h2>
+}
+
+<h3>BURASI MEMBER AREA ALTINDAKİ APPUSER CONTROLLER - INDEX ACTİONDIR</h3>
+
+
+
+<div class="row">
+    <div class="col-md-8">
+        @await Component.InvokeAsync("Articles")
+
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>
